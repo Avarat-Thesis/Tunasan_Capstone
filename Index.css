@@ -1,0 +1,469 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body
+{
+    justify-content: center;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* HEADER STYLE STARTS HERE */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 4vh 5vh;
+    background: #16348C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    height: 12vh;
+}
+
+.HeaderLogo {
+    margin-left: -1vh;
+    width: 10vh;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 2vh;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 10px ;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: .5vh;
+    background: #fff;
+    transition: .5s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background: none;
+    border: none;
+    color: fff;
+    font-size: 2vh;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #16348C;
+    min-width: 10vh;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #fff;
+    padding: 1vh 2vh;
+    text-decoration: none;
+    display: block;
+    font-size: 1.8vh;
+}
+
+/* Change color of dropdown links on hover */
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Optional: Add a transition for the dropdown */
+.dropdown-content {
+    transition: all 0.3s ease;
+}
+/* HEADER STYLE ENDS HERE */
+
+/* CONTENT STYLE STARTS HERE */
+
+.HeadPhoto
+{
+    text-align: center;
+    margin-top: 12vh;
+    max-width: 100vw;
+}
+
+.SunrisePhoto
+{
+    max-width: 100%;
+    height: 50vh;
+    display: block;
+    margin: auto;
+    filter: brightness(70%) contrast(100%);
+}
+
+.TunasanHealthCenter
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: transparent;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TunasanHealthCenter h2
+{
+    font-size: 8vh;
+    text-align: left;
+    font-weight: 100;
+    padding-bottom: 14vh;
+}
+
+.Offering
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 34%;
+    height: 83%;
+    background-color: transparent;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Offering p
+{
+    font-size: 2vh;
+}
+
+.FirstHeading h1
+{
+    color: #16348C;
+    padding: 3vh 0;
+    font-size: 4.5vw;
+    text-align: center;
+}
+
+.FirstHeading h2
+{
+    color: #16348C;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.SecondPart
+{
+    margin-top: 2vh;
+}
+
+.Buttons
+{
+    display: flex;
+    justify-content: center;
+}
+
+
+.Buttons p,
+.LoginButton p
+{
+    font-size: 2.5vh;
+    color: #000000;
+}
+
+.SelectionButton
+{
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    width: 20vw;
+    text-align: center;
+}
+
+.SelectionButton img
+{
+    vertical-align: middle; /* Align the image vertically */
+    margin-right: 5px; /* Add a small margin to separate the image from text */
+}
+
+.ThirdStrip
+{
+    position: relative;
+    margin-top: 12vh;
+    max-width: 100%;
+}
+
+.DocPhotoStrip
+{
+    max-width: 100%;
+    height: 35vh;
+    display: block;
+    margin: auto;
+}
+
+.Inquiries,
+.LoginButton {
+    position: absolute;
+}
+
+.Inquiries {
+    top: 10vh; /* Adjust as needed */
+    left: 10vw; /* Adjust as needed */
+    font-size: 1.6vw;
+}
+
+.LoginButton {
+    top: 10vh; /* Adjust as needed */
+    left: 50vw; /* Adjust as needed */
+}
+
+
+.DocPhotoStrip {
+    position: relative;
+    z-index: -1;
+}
+
+.SelectionButton2
+{
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    width: 25vw;
+    text-align: center;
+}
+
+.SelectionButton2 img
+{
+    vertical-align: middle; /* Align the image vertically */
+    margin-right: 5px; /* Add a small margin to separate the image from text */
+}
+
+.FourthPart h1, .FifthPart h1
+{
+    color: #16348C;
+    padding: 3vh 0;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.FourthPart p, .FifthPart p
+{
+    color: #000000;
+    font-size: 1.5vw;
+    text-align: center;
+    margin-bottom: 4vh;
+}
+
+.LocationPhoto
+{
+    text-align: center;
+}
+
+.LocationPhoto img
+{
+    width: 60vw;
+    border-radius: 10px;
+}
+
+.HospitalFeatures
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 5vh;
+    padding: 0 15vh;
+    /* background-image: url(Images/FeaturesBG.png);*/
+}
+
+.FeatureIcon
+{
+    height: 20vh;
+    margin: 2vh;
+}
+
+.infor
+{
+    text-align: center;
+}
+
+.infor h1
+{
+    font-size: 3vh;
+    color: #16348C;
+    margin: 0;
+}
+
+.infor h3
+{
+    font-size: 2vh;
+    color: #16348C;
+    margin: 1vh;
+}
+
+
+/* CONTENT STYLE ENDS HERE */
+
+/* FOOTER STYLE STARTS HERE */
+
+.footer
+{
+    background-color: #16348C;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10vh;
+    padding-top: 3vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+/* Style the logo section */
+.FooterLogoSection
+{
+    display: flex; /* Use flexbox to arrange the logo */
+    align-items: center; /* Center the logo vertically */
+    padding-left: 20px; /* Add left padding to the logo section */
+}
+
+/* Style the footer icons container */
+.FooterFirstColumn
+{
+    display: flex; /* Use flexbox to arrange icons horizontally */
+    flex-direction: column; /* Place icons and descriptions vertically */
+    margin-right: 10px; /* Add some spacing to the right of the icons container */
+}
+
+/* Style the footer icon */
+.FooterIcon
+{
+    display: flex; /* Use flexbox to arrange icon and description horizontally */
+    align-items: center; /* Center icon and description vertically */
+    margin-bottom: 10px; /* Add some spacing between icons and descriptions */
+    text-align: left;
+    font-weight: 100;
+}
+
+.FooterFirstColumnIcon
+{
+    height: 5vh;
+    margin-right: 2vh;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+.FooterColumn
+{
+    width: 23%;
+}
+
+.FooterLogo
+{
+    height: 20vh;
+    padding-top: 1.5vh;
+    padding-bottom: 2vh;
+}
+
+/* Style the description text */
+.FooterIcon p
+{
+    font-size: 18px; /* Set the desired font size for descriptions */
+    margin: 0; /* Remove default margin to align text with the icon */
+    line-height: 1.2; /* Adjust line height for multi-line text */
+}
+
+.SocialIcon
+{
+    height: 5vh;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+.FooterColumn h3
+{
+    font-weight: 100;
+    padding-bottom: 2vh;
+    position: relative;
+}
+
+.FooterColumn li
+{
+    text-decoration: none;
+    font-weight: 100;
+}
+
+
+.FooterColumn ul
+{
+    list-style: none;
+    padding-left: 0;
+}
+
+.FooterColumn ul li
+{
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    padding-bottom: .3vh;
+}
+
+.FooterColumn ul li a
+{
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    padding-bottom: .3vh;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+
+.FooterColumn ul li a:hover
+{
+    padding-left: 1vh;
+}
+
+.copyright
+{
+    background-color: #011e74;
+    color: #fff;
+    text-align: center;
+    padding: 1vh;
+}
+
+/* FOOTER STYLE ENDS HERE */

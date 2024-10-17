@@ -1,0 +1,187 @@
+/* CSS for layout */
+body {
+    display: flex;
+    flex-direction: column; /* Ensure vertical layout at mobile resolutions */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevents additional scrolling */
+}
+
+.Navbar {
+    position: fixed; /* Ensures navbar is fixed */
+    width: 15vw; /* Adjust width as needed */
+    height: 100vh; /* Full height of viewport */
+    overflow-y: auto; /* Allows scrolling within navbar if content overflows */
+    border-right: 1px solid #ccc;
+    background-color: #16348C; /* Blue background color */
+    color: #ffffff; /* White text color */
+    z-index: 1000; /* Ensures navbar is above other content */
+}
+
+.NavImg img {
+    display: block; /* Ensure image is a block element */
+    margin: 0 auto; /* Center align the image */
+    width: 11vw; /* Adjust image width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Optional spacing below image */
+    padding-top: 10vh;
+    padding-bottom: 3vh;
+}
+
+.Tab {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+}
+
+.Tab:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transition: all .5s ease;
+}
+
+/* Main content area */
+.right {
+    margin-left: 15vw; /* Offset left by the width of the navbar */
+    padding: 20px;
+    background-color: #d8d8d8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto; /* Allows scrolling within the main content area */
+    min-height: 100vh; /* Ensure it fills the viewport height */
+    height: auto; /* Let content define the height */
+}
+
+h2 {
+    color: #16348C;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+select {
+    width: 20%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+label {
+    margin-right: 15px;
+}
+
+button {
+    background-color: #16348C;
+    color: white;
+    border: 1px solid #16348C;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 1vh;
+    width: 5vw;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #fff;
+    border: 1px solid #16348C;
+    color: #000;
+    transition: all 0.5 ease;
+}
+
+.InfoLine2 {
+    display: flex;
+    align-items: center;
+    
+}
+
+.InfoLine2 h4 {
+    margin-right: 1vw;
+}
+
+.InfoLine2 input[type="date"]
+{
+    margin-right: 1vw;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 1vw;
+    border: 1px solid #888;
+    width: 20vw; /* Could be more or less, depending on screen size */
+    height: auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+/* Style for the circular div */
+.profile-photo-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Style for the upload button */
+.upload-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}

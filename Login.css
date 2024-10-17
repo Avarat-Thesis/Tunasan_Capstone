@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+}
+
+body {
+    justify-content: center;
+    display: flex;
+    min-height: 100vh;
+    padding-top: 12vh; /* Offset for the fixed header */
+    background-color: #fff8dc;
+}
+
+/* HEADER STYLE STARTS HERE */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 4vh 5vh;
+    background: #16348C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    height: 12vh;
+}
+
+.HeaderLogo {
+    margin-left: -1vh;
+    width: 10vh;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 2vh;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: .5vh;
+    background: #fff;
+    transition: .5s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2vh;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #16348C;
+    min-width: 10vh;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 1vh 2vh;
+    text-decoration: none;
+    display: block;
+    font-size: 1.8vh;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    transition: all 0.3s ease;
+}
+/* HEADER STYLE ENDS HERE */
+
+/* CONTENT STYLE STARTS HERE */
+
+.container {
+    display: flex;
+    width: 50vw;
+    height:40vh;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left
+{
+    background-color: #fff;
+    width: 50%;
+    height: 100%;
+    padding-top: 7vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+
+.right
+{
+    background-color: #16348C;
+    width: 50%;
+    height: 100%;
+    padding-top: 7vh;
+    text-align: center;
+}
+
+.left h2 {
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.left form {
+    width: 100%;
+}
+
+.left label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.left input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.left button {
+    width: 100%;
+    padding: 10px;
+    background-color: #16348C;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.left button:hover {
+    background-color: #fff;
+    color: #16348C;
+    
+}
+
+.LogoContainer
+{
+    text-align: center;
+}
+
+.LogoContainer img
+{
+    width: 6vw;
+    margin-bottom: 1vh;
+}
+
+
+.right .tagline {
+    font-size: 23px;
+    text-align: center;
+    color: #fff;
+}
+
+.right p
+{
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 2vh;
+}
+
+.AddInfo p
+{
+    font-size: 15px;
+}
+
+/* CONTENT STYLE ENDS HERE */

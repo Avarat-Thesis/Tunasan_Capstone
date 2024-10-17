@@ -1,0 +1,196 @@
+/* CSS for layout */
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.Navbar {
+    width: 15vw; /* Adjust width as needed */
+    height: 100vh; /* Full height of viewport */
+    overflow-y: auto; /* Scroll if content overflows */
+    border-right: 1px solid #ccc;
+    background-color: #16348C; /* Blue background color */
+    color: #ffffff; /* White text color */
+}
+
+.NavImg img {
+    display: block; /* Ensure image is a block element */
+    margin: 0 auto; /* Center align the image */
+    width: 11vw; /* Adjust image width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Optional spacing below image */
+    padding-top: 10vh;
+    padding-bottom: 3vh;
+}
+
+.Header {
+    position: absolute;
+    top: 20px; /* Move header down from the top */
+    width: calc(100% - 40px); /* Adjust width to fit content */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
+}
+
+.Tab {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+}
+
+.Tab:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transition: all .5s ease;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 1vw;
+    border: 1px solid #888;
+    width: 20vw; /* Could be more or less, depending on screen size */
+    height: auto;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+button {
+    background-color: #16348C;
+    color: white;
+    border: 1px solid #16348C;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 1vh;
+    width: 5vw;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #fff;
+    border: 1px solid #16348C;
+    color: #000;
+    transition: all 0.5 ease;
+}
+
+.right
+{
+    display: flex;
+}
+
+.PatientPhoto {
+    border: 2px solid #000;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Makes the div clickable */
+    text-align: center;
+}
+
+#photo-container {
+    cursor: pointer;
+    /* Other styles as needed */
+}
+
+
+
+#photo-label {
+    font-size: 12px;
+    color: #555; /* Optional styling for the label */
+}
+
+input[type="file"] {
+    display: none; /* Hides the file input */
+}
+
+.Vitals, .EmergCon, .PatientPersonalInfo
+{
+    width: 40vh;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+}
+
+.PastIllnesses, .KnownAllergies
+{
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+
+input[type="text"], input[type="date"], textarea {
+    font-size: 16px; /* Adjust font size */
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    margin-bottom: 10px; /* Space between inputs */
+}
+
+textarea {
+    height: 100px; /* Adjust height of the textarea */
+}
+
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
