@@ -13,7 +13,7 @@ $username = $_SESSION['Username'] ?? 'Admin'; // Fetch username or default to 'A
     <link rel="icon" href="Images/favicon.ico">
 </head>
 <body>
-    
+    <div></div>
                                                 <?php
                                                 require 'databaseconnection.php';
                                                 require 'Auth.php'; // Check if user is logged in
