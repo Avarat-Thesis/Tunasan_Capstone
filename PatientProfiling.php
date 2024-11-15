@@ -1,271 +1,344 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> BHW | Patient Profiling </title>
-        <link rel="stylesheet" href="PatientProfiling.css">
-        <link rel="icon" href="Images/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="Images/favicon.png" type="image/png">
-        <link rel="apple-touch-icon" href="Images/apple-touch-icon.png">
-        <link rel="android-chrome-icon" href="Images/android-chrome-192x192.png">
-        <link rel="android-chrome-icon" href="Images/android-chrome-512x512.png">
-        <link rel="icon" sizes="32x32" href="Images/favicon-32x32.png">
-        <link rel="icon" sizes="16x16" href="Images/favicon-16x16.png">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHW | Patient Profiling</title>
+    <link rel="stylesheet" href="PatientProfiling.css">
+    <link rel="icon" href="Images/favicon.ico">
+    <link rel="apple-touch-icon" href="Images/apple-touch-icon.png">
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
 
-    <body>
-        <!-- NAVBAR CONTENTS START -->
-        <div class="Navbar">
-            <div class="NavImg">
-                <img src="Images/Tunasan Logo.png">
-            </div>
+<?php
+require 'databaseconnection.php';
+require 'auth.php';
 
-            <a href="BHWDashboard.php" class="Tab" id="Dashboard">Dashboard</a>
-            <a href="PatientProfiling.php" class="Tab" id="Profiling">Profiling</a>
-            <a href="Schedules.php" class="Tab" id="">Schedules</a>
-            <a href="AddPatientRecord.php" class="Tab" id="AddPatientRecord">Add Patient Record</a>
-            <a href="#" class="Tab" id="ViewPatientRecords">View Patient Records</a>
-            <a href="#" class="Tab" id="GenerateReports">Generate Reports</a>
-            <a href="logout.php" class="Tab" id="Logout">Logout</a>
-        </div>
-        <!-- NAVBAR CONTENTS END -->
-        <div class="right">
-            <h2> <span style="color: #16348C;"> &#10074 </span> PATIENT PROFILING </h2> <br>
+    // Handle the form submission for updating a profile
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateProfile'])) {
+    $patientID = $_POST['patientID'];
+    $firstName = $_POST['firstName'];
+    $middleName = $_POST['middleName'];
+    $lastName = $_POST['lastName'];
+    $gender = ($_POST['gender'] === 'Male') ? 0 : 1;
+    $dob = $_POST['dob'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $contact = $_POST['contact'];
 
-            <?php
-    require 'databaseconnection.php';
-    require 'auth.php';
+    // Update query
+    $sql = "UPDATE tblpatientprofile SET 
+                FirstName='$firstName',
+                MiddleName='$middleName',
+                LastName='$lastName',
+                Gender='$gender',
+                DateofBirth='$dob',
+                Email='$email',
+                `Address`='$address'
+            WHERE PatientID='$patientID'";
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Collect form data
-        $Lastname = $_POST['Lastname'];
-        $Firstname = $_POST['Firstname'];
-        $Middlename = $_POST['Middlename'];
-        $Birthday = $_POST['Birthday'];
-        $Sex = $_POST['Sex'];
-        $PhoneNo = $_POST['PhoneNo'] ?? null;
-        $Email = $_POST['Email'] ?? null;
-        $HouseNo = $_POST['HouseNo'];
-        $Street = $_POST['Street'];
-        $Subd = $_POST['Subd'];
-        $Barangay = $_POST['Barangay'];
-        $Municipality = $_POST['Municipality'];
-        $Zip = $_POST['Zip'];
-        $ID = $_POST['ID'] ?? null;
-        $IDkind = $_POST['IDkind'] ?? null;
-        $EmergCon = $_POST['EmergCon'];
-        $Relationship = $_POST['Relationship'];
-        $EmergConNo = $_POST['EmergConNo'];
-    
-        // Prepare SQL statement to insert data into the database
-        $sql = "INSERT INTO tblpatientprofile (Lastname, Firstname, Middlename, Birthday, Sex, PhoneNo, Email, HouseNo, Street, Subd, Barangay, Municipality, Zip, ID, IDkind, EmergCon, Relationship, EmergConNo)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-        // Check if the SQL statement was prepared correctly
-        if ($stmt = $conn->prepare($sql)) {
-            // Bind parameters
-            $stmt->bind_param("ssssssssssssssssss",
-            $Lastname,
-            $Firstname,
-            $Middlename,
-            $Birthday,
-            $Sex,
-            $PhoneNo,
-            $Email,
-            $HouseNo,
-            $Street, $Subd, $Barangay, $Municipality, $Zip, $ID, $IDkind, $EmergCon, $Relationship, $EmergConNo);
-    
-            // Execute the statement
-            if ($stmt->execute()) {
-                echo "Record successfully saved!";
-
-                // Now log the activity after successful profile creation
-                // Assuming user session is already available from 'auth.php'
-                $UserID = $_SESSION['UserID']; // Assuming you're storing the logged-in user's ID in session
-                $Username = $_SESSION['Username']; // Get the logged-in user's name
-                $Role = $_SESSION['Role']; // Get the role of the logged-in user
-                $Activity = "Added patient profile for $Firstname $Middlename $Lastname";
-                
-                // Prepare SQL statement to log the activity
-                $log_sql = "INSERT INTO tblactlogs (UserID, Username, Role, Activity, Timestamp)
-                            VALUES (?, ?, ?, ?, NOW(6))";
-
-                if ($log_stmt = $conn->prepare($log_sql)) {
-                    // Bind parameters for activity log
-                    $log_stmt->bind_param("isss", $UserID, $Username, $Role, $Activity);
-                    
-                    // Execute the log query
-                    if ($log_stmt->execute()) {
-                        echo "Activity logged successfully!";
-                    } else {
-                        echo "Error logging activity: " . $log_stmt->error;
-                    }
-
-                    // Close the statement
-                    $log_stmt->close();
-                } else {
-                    echo "Error preparing activity log statement: " . $conn->error;
-                }
-
-            } else {
-                echo "Error executing query: " . $stmt->error;
-            }
-    
-            // Close the statement
-            $stmt->close();
-        } else {
-            // If prepare fails, print the error message
-            echo "Error preparing statement: " . $conn->error;
-        }
-    }
-    
-    $conn->close();
-?>
-
-            <form action="" method="POST">
-
-            <div class="PatientProfile">
-                <div class="profile-photo-container">
-                    <img id="profileImage" src="Images/default-avatar.png" alt="Profile Photo">
-                </div>
-
-                <!-- Hidden file input -->
-                <input type="file" id="profilePhoto" accept="image/*" style="display: none;" onchange="displayImage(this)">
-
-                <!-- Label to trigger the hidden file input -->
-                <label for="profilePhoto" class="upload-btn">Click to Upload Photo</label>
-                <div class="InfoLine1">
-                    <h4> Fullname </h4>
-                    <input type="text" id="Lastname" name="Lastname" placeholder="Last Name" required>
-                    <input type="text" id="Firstname" name="Firstname" placeholder="First Name" required>
-                    <input type="text" id="Middlename" name="Middlename" placeholder="Middle Name" required>
-                    <input type="text" id="Extension" name="Extension" placeholder="Extension">
-                </div>
-
-                <div class="InfoLine2">
-                    <h4> Birthday </h4>
-                    <input type="date" id="Birthday" name="Birthday" required>
-
-                    <h4> Sex </h4>
-                    <input type="radio" id="male" name="Sex" value="male">
-                    <label for="male">Male</label>
-                    <input type="radio" id="female" name="Sex" value="female">
-                    <label for="female">Female</label>
-                </div>
-
-                <div class="InfoLine3">
-                    <h4> Contact Details </h4>
-                    <input type="tel" id="PhoneNo" name="PhoneNo" placeholder="Phone Number">
-                    <input type="email" id="Email" name="Email" placeholder="Email">
-                </div>
-
-                <div class="InfoLine4">
-                    <div class="AddressLine1">
-                        <h4> Present Address </h4>
-                        <input type="text" id="HouseNo" name="HouseNo" placeholder="House Number" required>
-                        <input type="text" id="Street" name="Street" placeholder="Street" required>
-                        <input type="text" id="Subd" name="Subd" placeholder="Subdivision/Village" required>
-                    </div>
-
-                    <div class="AddressLine2">
-                        <input type="text" id="Barangay" name="Barangay" placeholder="Barangay" required>
-                        <input type="text" id="Municipality" name="Municipality" placeholder="Municipality" required>
-                        <input type="text" id="Zip" name="Zip" placeholder="Zip Code" required>
-                    </div>
-                </div>
-
-                <div class="InfoLine5">
-                    <h4> Identification Card </h4>
-                    <input type="text" id="ID" name="ID" placeholder="ID Number">
-                    <select id="IDkind" name="IDkind">
-                        <option value="ID Issuer" disabled selected hidden>ID Issuer</option>
-                        <option value="Barangay ID">Barangay ID</option>
-                        <option value="National ID">National ID</option>
-                    </select>
-                </div>
-
-                <div class="InfoLine6">
-                    <h4> Emergency Contact </h4>
-                    <input type="text" id="EmergCon" name="EmergCon" placeholder="Emergency Contact Person" required>
-                    <input type="text" id="Relationship" name="Relationship" placeholder="Relationship" required>
-                    <input type="tel" id="EmergConNo" name="EmergConNo" placeholder="Emergency Contact Number" required>
-                </div>
-
-                <button type="submit">Submit</button>
-
-            </div>
-
-            </form>
-
-        </div>
-
-        <!-- Modal HTML -->
-        <div id="logoutModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Are you sure you want to log out?</p>
-                <button id="confirmLogout">Yes</button>
-                <button id="cancelLogout">No</button>
-            </div>
-        </div>
-
-        <script>
-            // Modal elements
-            const modal = document.getElementById('logoutModal');
-            const closeModal = document.querySelector('.modal .close');
-            const confirmLogout = document.getElementById('confirmLogout');
-            const cancelLogout = document.getElementById('cancelLogout');
-            const logoutLink = document.getElementById('Logout');
-
-            // Show modal
-            logoutLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default anchor action
-                modal.style.display = 'block'; // Show the modal
-            });
-
-            // Hide modal
-            closeModal.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-
-            cancelLogout.addEventListener('click', function() {
-                modal.style.display = 'none'; // Hide the modal
-            });
-
-            // Confirm logout
-            confirmLogout.addEventListener('click', function() {
-                fetch('logout.php', {
-                    method: 'GET', // Use GET or POST as needed
-                    credentials: 'same-origin' // Ensure cookies are sent with the request
-                }).then(response => {
-                    if (response.ok) {
-                        window.location.href = 'Login.php'; // Redirect after successful logout
-                    } else {
-                        console.error('Logout failed');
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-
-            function displayImage(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        
-        reader.onload = function(e) {
-            document.getElementById('profileImage').src = e.target.result;
-        }
-        
-        reader.readAsDataURL(input.files[0]); // Convert image file to base64 string
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Profile updated successfully!');</script>";
+    } else {
+        echo "Error updating profile: " . $conn->error;
     }
 }
+?>
 
-// Click the hidden input when the label is clicked
-document.querySelector('.upload-btn').addEventListener('click', function() {
-    document.getElementById('profilePhoto').click();
-});
-        </script>
-    </body>
+<!-- NAVBAR -->
+    <div class="Navbar">
+        <div class="NavImg"><img src="Images/Tunasan Logo.png" alt="Logo"></div>
+        <div class="dashboard-container">
+            <a href="BHWDashboard.php" class="Tab"><div class="sidebar-item"><img src="Images/dashboardPIC.png" alt="dash" class="side_image"> Dashboard </div></a>
+            <a href="PatientProfiling.php" class="Tab"><div class="sidebar-item"><img src="Images/profilePIC.png" alt="prof" class="side_image"> Profiling </div></a>
+            <a href="Schedules.php" class="Tab"><div class="sidebar-item"><img src="Images/schedulesPIC.png" alt="folder" class="side_image"> Schedules </div></a>
+            <a href="Generate Reports.php" class="Tab"><div class="sidebar-item"><img src="Images/generatereportPIC.png" alt="sched" class="side_image"> Generate Reports</div></a>
+            <a href="logout.php" class="Tab" id="Logout"><div class="sidebar-item"><img src="Images/logoutPIC.png" alt="log" class="side_image"> Logout</div></a>
+        </div>
+    </div>
+
+<div class="right">
+    <div class="container">
+        <h2>List of Patients</h2>
+        <div class="table-controls">
+            <label>Show <select id="entries" onchange="updateEntries()">
+                <option value="5">5</option><option value="10" selected>10</option><option value="15">15</option>
+            </select> entries</label>
+            <input type="text" id="search" placeholder="Search" onkeyup="filterTable()">
+            <button onclick="openModal()">+ Add New Profile</button>
+        </div>
+        
+        <table id="patientTable" class="styled-table">
+            <thead>
+                <tr><th>#</th><th>Code</th><th>Patient Name</th><th>Action</th></tr>
+            </thead>
+            <tbody id="tableBody">
+                <?php
+                $sql = "SELECT * FROM tblpatientprofile";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $count = 1;
+                    while ($row = $result->fetch_assoc()) {
+                        $patientName = $row['FirstName'] . ' ' . $row['MiddleName'] . ' ' . $row['LastName'];
+                        echo "<tr data-id='{$row['PatientID']}' data-gender='{$row['Gender']}' data-dob='{$row['DateofBirth']}' data-address='{$row['Address']}' data-email='{$row['Email']}'>
+                                <td>{$count}</td>
+                                <td>{$row['PatientID']}</td>
+                                <td>{$patientName}</td>
+                                <td>
+                                    <div class='dropdown'>
+                                        <button onclick=\"toggleDropdown('{$row['PatientID']}')\">Action</button>
+                                        <div class='dropdown-content' id='dropdown-{$row['PatientID']}'>
+                                            <a href='#' onclick=\"viewPatientRecords('{$row['PatientID']}')\">View Records</a>
+                                            <a href='#' onclick=\"openEditModal('{$row['PatientID']}')\">Edit</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>";
+                        $count++;
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No patients found</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button onclick="prevPage()">Previous</button>
+            <span id="pageNumber">1</span>
+            <button onclick="nextPage()">Next</button>
+        </div>
+    </div>
+
+    <div id="patientDetailsPage" class="dynamic-content" style="display: none;"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay"></div>
+
+<!-- View and Edit Modals -->
+<div id="editProfileModal" class="addprofile-modal" style="display: none;">
+    <h2>Edit Profile</h2>
+    <form id="editProfileForm" method="POST">
+        <input type="hidden" name="patientID" id="editPatientID">
+        <div class="form-container">
+            <div class="form-column">
+                <div class="form-group"><label>First Name</label><input type="text" name="firstName" id="editFirstName" required></div>
+                <div class="form-group"><label>Last Name</label><input type="text" name="lastName" id="editLastName" required></div>
+                <div class="form-group"><label>Gender</label>
+                    <select name="gender" id="editGender">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Email</label><input type="email" name="email" id="editEmail"></div>
+            </div>
+            <div class="form-column">
+                <div class="form-group"><label>Middle Name</label><input type="text" name="middleName" id="editMiddleName"></div>
+                <div class="form-group"><label>Suffix</label><input type="text" name="suffix" id="editSuffix"></div>
+                <div class="form-group"><label>Date of Birth</label><input type="date" name="dob" id="editDob" required></div>
+                <div class="form-group"><label>Contact #</label><input type="tel" name="contact" id="editContact" required></div>
+            </div>
+        </div>
+        <div class="form-group full-width"><label>Address</label><textarea rows="3" name="address" id="editAddress"></textarea></div>
+        <div class="form-actions">
+            <button type="button" onclick="closeEditProfileModal()">Cancel</button>
+            <button type="submit" name="updateProfile">Update</button>
+        </div>
+    </form>
+</div>
+
+                            <!-- Modal HTML -->
+                            <div id="logoutModal" class="modal">
+                                <div class="modal-content">
+                                <span onclick="closeLogoutModal()" class="close">&times;</span>
+                                <p>Are you sure you want to log out?</p>
+                                <button id="confirmLogout">Yes</button>
+                                <button id="cancelLogout">No</button>
+                                </div>
+                            </div>
+
+                            <?php
+                            require 'databaseconnection.php';
+                            require 'Auth.php'; // Check if user is logged in
+?>
+
+<script>
+    let patients = Array.from(document.querySelectorAll('#patientTable tbody tr')).map((row) => ({
+        id: row.getAttribute('data-id'),
+        code: row.cells[1].innerText,
+        name: row.cells[2].innerText,
+        gender: row.getAttribute('data-gender'),
+        dob: row.getAttribute('data-dob'),
+        address: row.getAttribute('data-address'),
+        email: row.getAttribute('data-email'),
+        contact: row.getAttribute('data-contact')
+    }));
+
+    let currentPage = 1;
+    let entriesPerPage = parseInt(document.getElementById("entries").value);
+
+    function renderTable() {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+        const startIndex = (currentPage - 1) * entriesPerPage;
+        const paginatedPatients = patients.slice(startIndex, startIndex + entriesPerPage);
+
+        paginatedPatients.forEach((patient, index) => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${startIndex + index + 1}</td>
+                    <td>${patient.code}</td>
+                    <td>${patient.name}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button onclick="toggleDropdown('${patient.id}')">Action</button>
+                            <div class="dropdown-content" id="dropdown-${patient.id}">
+                                <a href="#" onclick="viewPatientRecords('${patient.id}')">View Records</a>
+                                <a href="#" onclick="openEditModal('${patient.id}')">Edit</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>`;
+        });
+        document.getElementById("pageNumber").textContent = currentPage;
+    }
+
+    function updateEntries() {
+        entriesPerPage = parseInt(document.getElementById("entries").value);
+        currentPage = 1;
+        renderTable();
+    }
+
+    function nextPage() {
+        if (currentPage * entriesPerPage < patients.length) {
+            currentPage++;
+            renderTable();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    }
+
+    function toggleDropdown(id) {
+        document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+        document.getElementById(`dropdown-${id}`).style.display = 'block';
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        }
+    });
+
+    function openEditModal(patientID) {
+        const patient = patients.find(p => p.id === patientID);
+        if (patient) {
+            document.getElementById('editPatientID').value = patient.id;
+            document.getElementById('editFirstName').value = patient.name.split(' ')[0];
+            document.getElementById('editMiddleName').value = patient.name.split(' ')[1] || '';
+            document.getElementById('editLastName').value = patient.name.split(' ')[2] || '';
+            document.getElementById('editGender').value = patient.gender === '0' ? 'Male' : 'Female';
+            document.getElementById('editEmail').value = patient.email || '';
+            document.getElementById('editDob').value = patient.dob;
+            document.getElementById('editAddress').value = patient.address;
+            document.getElementById('editContact').value = patient.contact || '';
+
+            document.getElementById('editProfileModal').style.display = 'block';
+            document.getElementById('modalOverlay').style.display = 'block';
+        }
+    }
+
+    function closeEditProfileModal() {
+        document.getElementById('editProfileModal').style.display = 'none';
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable();
+    });
+
+    // Dropdown Logic
+    function toggleDropdown(id) {
+        const dropdown = document.getElementById(`dropdown-${id}`);
+        const isCurrentlyVisible = dropdown.style.display === 'block';
+        
+        // Hide all dropdowns first
+        document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+
+        // Show the clicked dropdown if it was not already visible
+        if (!isCurrentlyVisible) {
+            dropdown.style.display = 'block';
+        }
+    }
+
+    // Event listener to close dropdown when clicking outside of it
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+                dropdown.style.display = 'none';
+            });
+        }
+    });
+
+    // Event listener for DOM content loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable();
+    });
+
+    // Pagination, rendering table, and patient records logic...
+    function showPatientList() {
+        document.querySelector('.container').style.display = 'block'; // Show the main list container
+        document.getElementById('patientDetailsPage').style.display = 'none'; // Hide the patient details page
+    }
+
+     // Modal elements
+     const modal = document.getElementById('logoutModal');
+        const closeModal = document.querySelector('.modal .close');
+        const confirmLogout = document.getElementById('confirmLogout');
+        const cancelLogout = document.getElementById('cancelLogout');
+        const logoutLink = document.getElementById('Logout');
+
+        // Show modal
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default anchor action
+            modal.style.display = 'block'; // Show the modal
+        });
+
+        // Hide modal
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        cancelLogout.addEventListener('click', function() {
+            modal.style.display = 'none'; // Hide the modal
+        });
+
+        // Confirm logout
+        confirmLogout.addEventListener('click', function() {
+            fetch('logout.php', {
+                method: 'GET', // Use GET or POST as needed
+                credentials: 'same-origin' // Ensure cookies are sent with the request
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = 'Login.php'; // Redirect after successful logout
+                } else {
+                    console.error('Logout failed');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    
+    </script>
+</body>
 </html>
-

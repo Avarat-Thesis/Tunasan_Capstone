@@ -17,17 +17,14 @@
 <body>
     <!-- NAVBAR CONTENTS START -->
     <div class="Navbar">
-        <div class="NavImg">
-            <img src="Images/Tunasan Logo.png" alt="Logo">
+        <div class="NavImg"><img src="Images/Tunasan Logo.png" alt="Logo"></div>
+        <div class="dashboard-container">
+            <a href="BHWDashboard.php" class="Tab"><div class="sidebar-item"><img src="Images/dashboardPIC.png" alt="dash" class="side_image"> Dashboard </div></a>
+            <a href="PatientProfiling.php" class="Tab"><div class="sidebar-item"><img src="Images/profilePIC.png" alt="prof" class="side_image"> Profiling </div></a>
+            <a href="Schedules.php" class="Tab"><div class="sidebar-item"><img src="Images/schedulesPIC.png" alt="folder" class="side_image"> Schedules </div></a>
+            <a href="Generate Reports.php" class="Tab"><div class="sidebar-item"><img src="Images/generatereportPIC.png" alt="sched" class="side_image"> Generate Reports</div></a>
+            <a href="logout.php" class="Tab" id="Logout"><div class="sidebar-item"><img src="Images/logoutPIC.png" alt="log" class="side_image"> Logout</div></a>
         </div>
-
-        <a href="BHWDashboard.php" class="Tab" id="Dashboard">Dashboard</a>
-        <a href="PatientProfiling.php" class="Tab" id="Profiling">Profiling</a>
-        <a href="Schedules.php" class="Tab" id="">Schedules</a>
-        <a href="AddPatientRecord.php" class="Tab" id="AddPatientRecord">Add Patient Record</a>
-        <a href="#" class="Tab" id="ViewPatientRecords">View Patient Records</a>
-        <a href="#" class="Tab" id="GenerateReports">Generate Reports</a>
-        <a href="logout.php" class="Tab" id="Logout">Logout</a>
     </div>
     <!-- NAVBAR CONTENTS END -->
     
@@ -41,20 +38,20 @@
         </div>
     </div>
 
-    <!-- Modal HTML -->
-    <div id="logoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Are you sure you want to log out?</p>
-            <button id="confirmLogout">Yes</button>
-            <button id="cancelLogout">No</button>
-        </div>
+<!-- Modal HTML -->
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+     <span onclick="closeLogoutModal()" class="close">&times;</span>
+     <p>Are you sure you want to log out?</p>
+     <button id="confirmLogout">Yes</button>
+     <button id="cancelLogout">No</button>
     </div>
+</div>
 
-<?php
-require 'databaseconnection.php';
-require 'Auth.php'; // Check if user is logged in
-?>
+                                                            <?php
+                                                            require 'databaseconnection.php';
+                                                            require 'Auth.php'; // Check if user is logged in
+                                                            ?>
 
 
     <script>

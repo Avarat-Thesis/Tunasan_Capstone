@@ -1,164 +1,123 @@
-/* CSS for layout */
 body {
     display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .Navbar {
-    width: 15vw; /* Adjust width as needed */
-    height: 100vh; /* Full height of viewport */
-    overflow-y: auto; /* Scroll if content overflows */
+    position: fixed; 
+    width: 15vw;
+    height: 100vh;
+    overflow-y: auto;
     border-right: 1px solid #ccc;
-    background-color: #16348C; /* Blue background color */
-    color: #ffffff; /* White text color */
-    position: fixed; /* Fixes the navbar in place */
+    background-color: #16348C;
+    color: #ffffff;
+    z-index: 1000;
 }
 
 .NavImg img {
-    display: block; /* Ensure image is a block element */
-    margin: 0 auto; /* Center align the image */
-    width: 11vw; /* Adjust image width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-bottom: 20px; /* Optional spacing below image */
+    display: block;
+    margin: 0 auto;
+    width: 11vw;
+    height: auto;
+    margin-bottom: 20px;
     padding-top: 10vh;
     padding-bottom: 3vh;
-}
-
-.Workspace {
-    flex: 1; /* Take remaining space */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    position: relative;
-    margin-left: 15vw; /* To account for fixed navbar */
-    overflow-y: auto; /* Enable scrolling for workspace */
-}
-
-.Header {
-    position: absolute;
-    top: 20px; /* Move header down from the top */
-    width: calc(100% - 40px); /* Adjust width to fit content */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ccc;
-    z-index: 10;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for better visibility */
-}
-
-.Workspace img {
-    height: 80vh;
-    opacity: 30%;
 }
 
 .Tab {
     display: block;
     padding: 10px 20px;
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit text color from parent */
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1vh;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+}
+
+.Tab:hover{
+    background-color: #0056b3;
+    transition: all .5s ease;
+}
+
+.sidebar-item img {
+    height: 4vh;
+    margin-right: 1vw;
+}
+
+.Workspace {
+    margin-left: 15vw;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: linear-gradient(to bottom right, #FFFAF1, #F7ECCB);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto;
+    min-height: 100vh;
+    height: auto;
+    position: relative;
+}
+
+.Container {
+    width: calc(100% - 40px);
+    max-width: 98%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+
+.Tab {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: inherit;
 }
 
 .Tab:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
     transition: all .5s ease;
 }
 
-.WorkspaceSection {
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #fff;
-}
-
-/* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 1vw;
-    border: 1px solid #888;
-    width: 20vw; /* Could be more or less, depending on screen size */
-    height: auto;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all .5s ease;
-}
-
-button {
-    background-color: #16348C;
-    color: white;
-    border: 1px solid #16348C;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    margin: 1vh;
-    width: 5vw;
-    height: 5vh;
-    border-radius: 10px;
-}
-
-button:hover {
-    background-color: #fff;
-    border: 1px solid #16348C;
-    color: #000;
-    transition: all 0.5 ease;
-}
-
-table {
+.styled-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 1em;
     font-family: Arial, sans-serif;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    table-layout: fixed; /* Makes columns evenly sized */
+    table-layout: fixed;
 }
+
 th, td {
-    padding: 12px 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
 }
+
 th {
-    background-color: #16348C; /* Green background for headers */
-    color: white; /* White text */
-    position: sticky; /* Keep header fixed */
-    top: 0; /* Stick to the top */
-    z-index: 10; /* Ensure it is above other content */
+    background-color: #16348C;
+    color: white;
 }
+
 tr:nth-child(even) {
-    background-color: #f2f2f2; /* Light grey for even rows */
+    background-color: #f2f2f2;
 }
+
 tr:hover {
-    background-color: #ddd; /* Darker grey on hover */
+    background-color: #ddd;
 }
+
 h2 {
     text-align: center;
     color: #333;
@@ -187,5 +146,31 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    background-color: #f1f1f1;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button.active {
+    background-color: #007bff; /* Adjust this color as needed */
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination button:hover {
+    background-color: #ddd;
 }

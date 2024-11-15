@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Arial';
     align-items: center;
 }
 
@@ -10,8 +10,7 @@ body {
     justify-content: center;
     display: flex;
     min-height: 100vh;
-    padding-top: 12vh; /* Offset for the fixed header */
-    background-color: #fff8dc;
+    background: linear-gradient(to bottom right, #62cff4, #2c67f2);
 }
 
 /* HEADER STYLE STARTS HERE */
@@ -103,8 +102,10 @@ body {
 
 .container {
     display: flex;
-    width: 50vw;
-    height:40vh;
+    width: 860px; /* Fixed width */
+    height: 470px; /* Fixed height */
+    max-width: 80vw; /* Ensures the container does not exceed 80% of viewport width */
+    max-height: 90vh; /* Ensures the container does not exceed 90% of viewport height */
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     justify-content: space-around;
@@ -114,20 +115,25 @@ body {
 .left
 {
     background-color: #fff;
-    width: 50%;
+    width: 60%;
     height: 100%;
-    padding-top: 7vh;
-    padding-left: 3vw;
-    padding-right: 3vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
 }
 
 .right
 {
     background-color: #16348C;
-    width: 50%;
+    width: 40%;
     height: 100%;
-    padding-top: 7vh;
     text-align: center;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .left h2 {
@@ -158,7 +164,7 @@ body {
     width: 100%;
     padding: 10px;
     background-color: #16348C;
-    border: none;
+    border: 1px #16348C solid;
     color: #fff;
     font-size: 16px;
     border-radius: 4px;
@@ -169,6 +175,7 @@ body {
 .left button:hover {
     background-color: #fff;
     color: #16348C;
+    border: 1px #16348C solid;
     
 }
 

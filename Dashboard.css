@@ -1,28 +1,55 @@
-/* CSS for layout */
 body {
     display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .Navbar {
-    width: 15vw; /* Adjust width as needed */
-    height: 100vh; /* Full height of viewport */
-    overflow-y: auto; /* Scroll if content overflows */
+    position: fixed; 
+    width: 15vw;
+    height: 100vh;
+    overflow-y: auto;
     border-right: 1px solid #ccc;
-    background-color: #16348C; /* Blue background color */
-    color: #ffffff; /* White text color */
+    background-color: #16348C;
+    color: #ffffff;
+    z-index: 1000;
 }
 
 .NavImg img {
-    display: block; /* Ensure image is a block element */
-    margin: 0 auto; /* Center align the image */
-    width: 11vw; /* Adjust image width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-bottom: 20px; /* Optional spacing below image */
+    display: block;
+    margin: 0 auto;
+    width: 11vw;
+    height: auto;
+    margin-bottom: 20px;
     padding-top: 10vh;
     padding-bottom: 3vh;
+}
+
+.Tab {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1vh;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+}
+
+.Tab:hover{
+    background-color: #0056b3;
+    transition: all .5s ease;
+}
+
+.sidebar-item img {
+    height: 4vh;
+    margin-right: 1vw;
 }
 
 .Workspace {
@@ -33,6 +60,7 @@ body {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     position: relative;
+    margin-left: 15vw;
 }
 
 .Header {
@@ -61,18 +89,6 @@ body {
 .Workspace img {
     height: 80vh;
     opacity: 30%;
-}
-
-.Tab {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit text color from parent */
-}
-
-.Tab:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transition: all .5s ease;
 }
 
 .WorkspaceSection {
@@ -140,19 +156,68 @@ button:hover {
     transition: all 0.5 ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .Navbar {
-        width: 100%;
-        height: auto;
-        max-height: 10vh; /* Example, adjust as needed */
-        overflow-x: auto;
-        overflow-y: hidden;
-        border-right: none;
-        border-bottom: 1px solid #ccc;
-    }
 
-    .Workspace {
-        padding: 10px;
-    }
+.StatsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.StatBox {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.StatBox h2 {
+    margin: 10px 0;
+    font-size: 36px;
+}
+
+.StatBox p {
+    font-size: 14px;
+    color: gray;
+}
+
+.MainContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.StaffRota, .Tasks {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.PatientsTable {
+    grid-column: span 2;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.styled-table th, .styled-table td {
+    text-align: left;
+    padding: 10px;
+}
+
+.styled-table th {
+    background-color: #f4f4f4;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }

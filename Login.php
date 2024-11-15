@@ -112,16 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" sizes="16x16" href="Images/favicon-16x16.png">
 </head>
 <body>
-    <header class="header">
-        <a href="Index.php"> <img src="Images/Health Center Logo.png" class="HeaderLogo"> </a>
-        <nav class="navbar">
-            <a href="#"> HEALTH CONDITIONS </a>
-            <a href="#"> OUR SERVICES </a>
-            <a href="#">ABOUT US</a>
-            <a href="Login.php"> LOG IN </a>
-        </nav>
-    </header>
-
     <main>
         <div class="container">
             <div class="left">
@@ -129,6 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form action="Login.php" method="POST">
                     <input type="text" id="Username" name="Username" placeholder="Username" required>
                     <input type="password" id="Password" name="Password" placeholder="Password" required>
+                    <label> Forgot Password </label>
                     <button type="submit">Log In</button>
                 </form>
                 <?php
@@ -142,7 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <img src="Images/Health Center Logo.png" alt="Logo" class="logo">
                 </div>
                 <p class="tagline"> TUNASAN HEALTH CENTER </p>
-                <p> Offering free and quality healthcare for Tunasanians </p>
+                <p> Offering free and quality healthcare for Tunasanians <br> <br> </p>
+                <p> <span style="font-size: 16px"> Not a member yet? <br> <br> Contact administrator to join us. </span>  </p>
             </div>
         </div>
     </main>

@@ -97,6 +97,33 @@
         </div>
 
         </form>
+                        <?php
+                        $sql = "SELECT * FROM tblpatientprofile"; // Adjust as necessary to fit the actual column for date order
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            $count = 1;
+                            while ($row = $result->fetch_assoc()) {
+                                $patientName = $row['FirstName'] . ' ' . $row['MiddleName'] . ' ' . $row['LastName'];
+                                echo "<tr>
+                                        <td>{$count}</td>
+                                        <td>{$row['PatientID']}</td>
+                                        <td>{$patientName}</td>
+                                        <td>
+                                            <div class='dropdown'>
+                                                <button onclick='toggleDropdown(\"{$row['PatientID']}\")'>Action</button>
+                                                <div class='dropdown-content' id='dropdown-{$row['PatientID']}'>
+                                                    <a href='#' onclick='viewPatientRecords(\"{$row['PatientID']}\")'>View Records</a>
+                                                    <a href='#' onclick='editPatient(\"{$row['PatientID']}\")'>Edit</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>";
+                                $count++;
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No patients found</td></tr>";
+                        }
+                        ?>
 
         <!-- Confirmation Modal HTML -->
         <div id="submitModal" class="modal">
@@ -179,6 +206,25 @@
             confirmSubmit.addEventListener('click', function() {
                 document.querySelector('form').submit(); // Submit the form if confirmed
             });
+                                        // Populate the table with the paginated data.
+                                paginatedPatients.forEach((p, i) => {
+                                    tableBody.innerHTML += `
+                                        <tr>
+                                            <td>${startIndex + i + 1}</td>
+                                            <td>${p.code}</td>
+                                            <td>${p.name}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button onclick="toggleDropdown(${p.id})">Action</button>
+                                                    <div class="dropdown-content" id="dropdown-${p.id}">
+                                                        <a href="#" onclick="viewPatientRecords(${p.id})">View Records</a>
+                                                        <a href="#" onclick="editPatient(${p.id})">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    `;
+                                });
 
             // Trigger the file input when the div is clicked
 document.getElementById('profile-picture').addEventListener('click', function() {
