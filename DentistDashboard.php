@@ -16,7 +16,7 @@
 </head>
 <body>
     <!-- NAVBAR CONTENTS START -->
-    <div class="Navbar">
+    <!-- <div class="Navbar">
         <div class="NavImg">
             <img src="Images/Tunasan Logo.png" alt="Logo">
         </div>
@@ -26,7 +26,7 @@
         <a href="ViewPatientRecords.php" class="Tab" id="ViewPatientRecords">View Patient Records</a>
         <a href="#" class="Tab" id="Reports">Reports</a>
         <a href="logout.php" class="Tab" id="Logout">Logout</a>
-    </div>
+    </div> -->
     <!-- NAVBAR CONTENTS END -->
     
     <div class="Workspace">
